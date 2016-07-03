@@ -78,13 +78,13 @@ public class GenericCrudServiceImpl implements GenericCrudService {
 		return genericCrudDao.findAllByNativeQuery(query, parameters);
 	}
 
-	@SuppressWarnings("unchecked")
+/*	@SuppressWarnings("unchecked")
 	public <T extends AbstractBaseEntity> T findSingleObjectByNativeQuery(
 			String query, Map parameters, Class s) throws Exception {
 
 		return (T) genericCrudDao.findSingleObjectByNativeQuery(query,
 				parameters, s);
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	public <T> T findSingleObjectByNativeQuery(String query, Map parameters)
@@ -209,8 +209,8 @@ public class GenericCrudServiceImpl implements GenericCrudService {
 	}
 
 	@Override
-	public <T extends AbstractEntity> T findSingleObjectByNativeQuery(
-			String query, Map parameters, Class s) throws Exception {
+	public <T extends AbstractEntity> T findSingleObjectByNativeQuery(String query, Map parameters, Class s)
+			throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
