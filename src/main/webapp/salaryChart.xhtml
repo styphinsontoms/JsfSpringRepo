@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<body>
+	<ui:composition>
+		<p:panel id="salChart_#{idPrefix}" header="Employee Salary Chart"
+			rendered="true" toggleable="true">
+			<h:panelGroup layout="block">
+				<h:outputText value="Select ChartType" />
+				<h:selectOneMenu value="#{empSalaryChartMbean.seletedChartType}">
+					<f:selectItems value="#{empSalaryChartMbean.chartTypeList}" />
+					<p:ajax event="change" process="@form" update="@all" />
+				</h:selectOneMenu>
+			</h:panelGroup>
+			<p:remoteCommand name="aeByReportTypeCmd"
+				update="salChart_#{idPrefix}"
+				actionListener="#{empSalaryChartMbean.drillDown}"
+				oncomplete="drawAEByReporterType();" />
+			<h:panelGroup layout="block" id="salChartGraphPanalId_#{idPrefix}"
+				style="width:98%;height:350px;z-index:9;padding:0px; margin:2px; text-align:center;position:relative;  "></h:panelGroup>
+
+
+		</p:panel>
+	</ui:composition>
+</body>
+</html>

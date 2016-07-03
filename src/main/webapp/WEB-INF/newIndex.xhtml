@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	</f:facet>
+	<title>Register Employee</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:inputText binding="#{myBean.inputComponent}"
+			value="#{myBean.inputValue}"
+			valueChangeListener="#{myBean.inputChanged}">
+			<f:converter converterId="myConverter" />
+			<f:validator validatorId="myValidator" />
+		</h:inputText>
+		<h:commandButton value="submit" action="#{myBean.action}" />
+		<h:outputText binding="#{myBean.outputComponent}"
+			value="#{myBean.outputValue}" />
+		<h:messages />
+	</h:form>
+</h:body>
+</html>

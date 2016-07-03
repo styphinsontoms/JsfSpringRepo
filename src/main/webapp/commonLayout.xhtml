@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet name="commonstyle.css" library="css" />
+</h:head>
+
+
+<f:view contentType="text/html">
+
+	<f:metadata>
+
+		<div id="metadata">
+			<ui:insert name="metadata" />
+		</div>
+
+	</f:metadata>
+
+	<h:body>
+		<p:ajaxExceptionHandler
+			type="javax.faces.application.ViewExpiredException" />
+		<p:ajaxExceptionHandler type="java.lang.Exception" />
+
+		<h:panelGroup id="page" layout="block">
+			<h:panelGroup id="header" styleClass="ui-fluid menuBottom"
+				layout="block">
+				<ui:insert name="header">
+					<ui:include src="commonHeader.xhtml" />
+				</ui:insert>
+			</h:panelGroup>
+			<h:panelGroup id="content" styleClass="ui-fluid bodySty"
+				layout="block">
+				<ui:insert name="content">
+					<ui:include src="commonContent.xhtml" />
+				</ui:insert>
+			</h:panelGroup>
+		</h:panelGroup>
+		<ui:debug
+			rendered="#{initParam['javax.faces.PROJECT_STAGE'] eq 'Development'}"
+			 />
+	</h:body>
+</f:view>
+
+</html>

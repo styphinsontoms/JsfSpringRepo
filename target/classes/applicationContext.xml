@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	<!-- Enable Spring Annotation Configuration -->
+	<context:annotation-config />
+	<!-- Scan for all of Spring components such as Spring Service -->
+	<context:component-scan base-package="com.example.*"></context:component-scan>
+
+	<!-- Necessary to get the entity manager injected into the factory bean -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="pum"
+		class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="persistenceXmlLocations">
+			<list>
+				<value>classpath*:META-INF/persistence.xml</value>
+			</list>
+		</property>
+		<property name="defaultDataSource" ref="parentDataSource" />
+	</bean>
+
+	<bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/TestDB" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<property name="initialSize" value="10" />
+		<property name="maxActive" value="40" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="600" />
+		<property name="logAbandoned" value="true" />
+		<!-- For any bean inheriting from this bean and is not an oracle data-source -->
+		<!-- this value needs to overriden. The reason is that this query works -->
+		<!-- only in oracle. For overriding, add this property in the child bean 
+			with -->
+		<!-- a query that works in that database -->
+		<property name="validationQuery" value="select 1 from dual" />
+		<!-- when getting connection, this fires the above query -->
+		<property name="testOnBorrow" value="true" />
+		<!-- when returning connection to the pool, this fires the above query -->
+		<property name="testOnReturn" value="true" />
+	</bean>
+
+	<!-- Define EclipseLink JPA Vendor Adapter -->
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+		<!-- <property name="generateDdl" value="true" /> -->
+		<property name="showSql" value="true" />
+	</bean>
+
+	<!-- Define Hibernate JPA Vendor Adapter -->
+	<!-- <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"> 
+		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" 
+		/> </bean> -->
+
+	<!-- Entity Manager Factory -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="pum"></property>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+	</bean>
+
+	<!-- Transaction Manager -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<bean class="org.dozer.spring.DozerBeanMapperFactoryBean">
+		<property name="mappingFiles" value="classpath*:/*mapping.xml" />
+	</bean>
+	<!-- Detect @Transactional -->
+	<tx:annotation-driven mode="proxy"
+		transaction-manager="transactionManager" />
+</beans>

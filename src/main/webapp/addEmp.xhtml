@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<h:form>
+		<p:outputLabel value="Enter Employee Name:"></p:outputLabel>
+		<p:growl id="messages"></p:growl>
+		<p:panelGrid columns="2" style="width: 98%;">
+			<p:outputLabel value="Enter Employee Name:"></p:outputLabel>
+			<p:inputText value="#{empRegisterView.employee.employeeName}"
+				size="50"></p:inputText>
+			<p:outputLabel value="Enter Employee Hire Date:"></p:outputLabel>
+			<p:calendar value="#{empRegisterView.employee.employeeHireDate}"
+				size="50"></p:calendar>
+			<p:outputLabel value="Enter Employee Salary:"></p:outputLabel>
+			<p:inputText value="#{empRegisterView.employee.salary.basicSalarry}"
+				size="50"></p:inputText>
+			<p:outputLabel value="Enter Employee Experience:"></p:outputLabel>
+			<p:inputText value="#{empRegisterView.employee.empYrOfExperience}"
+				size="50"></p:inputText>
+			<p:outputLabel value="Enter Employee Designation:"></p:outputLabel>
+			<p:inputText value="#{empRegisterView.employee.employeeDesignation}"
+				size="50"></p:inputText>
+			<p:outputLabel value="Enter Employee Street:"></p:outputLabel>
+			<p:inputText value="#{empRegisterView.address.streetName}"
+				size="50"></p:inputText>
+			<p:outputLabel value="Enter Employee City"></p:outputLabel>
+			<p:inputText value="#{empRegisterView.address.cityName}"
+				size="50"></p:inputText>
+		</p:panelGrid>
+		<p:commandButton value="Register" action="#{empRegisterView.register}"
+			update="messages"></p:commandButton>
+	</h:form>
+</h:body>
+</html>

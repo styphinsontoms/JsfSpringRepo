@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping wildcard="false">
+		<class-a>com.example.dao.entity.Employee</class-a>
+		<class-b>com.example.dozer.dest.pojo.EmployeeDest</class-b>
+		<field>
+			<a>salary.netSalary</a>
+			<b>netSalary</b>
+		</field>
+	</mapping>
+	<mapping wildcard="false">
+		<class-a>com.example.dao.entity.Address</class-a>
+		<class-b>com.example.dozer.dest.pojo.EmployeeDest</class-b>
+		<field>
+			<a>streetName</a>
+			<b>street</b>
+		</field>
+		<field>
+			<a>cityName</a>
+			<b>city</b>
+		</field>
+	</mapping>
+	<mapping wildcard="false">
+		<class-a>com.example.chart.pojo.ChartDataSource</class-a>
+		<class-b>com.example.chart.pojo.Chart</class-b>
+		<field  custom-converter="com.example.chart.mapping.impl.ArrayToMapPropertyConverter">
+			<a>srcData</a>
+			<b>additionalProperties</b>
+		</field>
+
+	</mapping>
+	
+	
+</mappings> 
