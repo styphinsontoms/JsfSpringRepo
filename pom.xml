@@ -12,6 +12,8 @@
 		<logback.version>1.0.7</logback.version>
 		<org.springframework.version>4.0.0.RELEASE</org.springframework.version>
 		<spring-security.version>4.0.0.RELEASE</spring-security.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 	<repositories>
 		<repository>
@@ -20,19 +22,19 @@
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
-		   <repository>
-		      <id>java.net</id>
-		      <url>https://maven.java.net/content/repositories/public/</url>
-		    </repository>
-		  <repository>
-		    <id>central</id>
-		    <name>Maven Repository Switchboard</name>
-		    <layout>default</layout>
-		    <url>http://repo1.maven.org/maven2</url>
-		    <snapshots>
-		      <enabled>false</enabled>
-		    </snapshots>
-		  </repository>
+		<repository>
+			<id>java.net</id>
+			<url>https://maven.java.net/content/repositories/public/</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -97,11 +99,8 @@
 			<version>5.1.31</version>
 		</dependency>
 		<!-- Oracle driver connector library -->
-		<!--<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.4.0</version>
-		</dependency> -->
+		<!--<dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc14</artifactId> 
+			<version>10.2.0.4.0</version> </dependency> -->
 		<!-- Spring ORM -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -195,32 +194,42 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<!-- <plugins>
+		<plugins>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> 
+				<configuration> <source>1.6</source> <target>1.6</target> </configuration> 
+				</plugin> <plugin> <groupId>org.jsonschema2pojo</groupId> <artifactId>jsonschema2pojo-maven-plugin</artifactId> 
+				<version>0.4.14</version> <configuration> <sourceDirectory>${basedir}/src/main/resources/schema</sourceDirectory> 
+				<targetPackage>com.example.chart.pojo</targetPackage> </configuration> <executions> 
+				<execution> <goals> <goal>generate</goal> </goals> </execution> </executions> 
+				</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<warName>medcom</warName>
+					<warSourceDirectory>src/main/webapp/</warSourceDirectory>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+					<!-- <packagingExcludes> WEB-INF/weblogic.xml, WEB-INF/weblogic-application.xml, 
+						WEB-INF/lib/xml-apis-1.0.b2.jar, WEB-INF/lib/xercesImpl-2.2.1.jar </packagingExcludes> -->
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jsonschema2pojo</groupId>
-				<artifactId>jsonschema2pojo-maven-plugin</artifactId>
-				<version>0.4.14</version>
-				<configuration>
-					<sourceDirectory>${basedir}/src/main/resources/schema</sourceDirectory>
-					<targetPackage>com.example.chart.pojo</targetPackage>
-				</configuration>
+
 				<executions>
 					<execution>
+						<phase>package</phase>
 						<goals>
-							<goal>generate</goal>
+							<goal>war</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
-		</plugins> -->
+		</plugins>
+
 		<finalName>${project.artifactId}</finalName>
 	</build>
 </project>
