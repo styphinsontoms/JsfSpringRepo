@@ -8,6 +8,7 @@
 		<intercept-url pattern="/secured/*" access="ROLE_USER" />
 	</http> -->
 
+<!-- Hard Coded Username and password -->
 	<!-- <authentication-manager>
 		<authentication-provider>
 			<user-service>
