@@ -12,7 +12,8 @@
 	</context-param>
 	<context-param>
 		<description>State saving method: 'client' or 'server' (=default). See
-			JSF Specification 2.5.2</description>
+			JSF Specification 2.5.2
+		</description>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>client</param-value>
 	</context-param>
@@ -95,5 +96,7 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 </web-app>

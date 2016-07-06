@@ -1,45 +1,74 @@
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<f:facet name="first">
-		<meta http-equiv="X-UA-Compatible" content="IE=9" />
-	</f:facet>
-	<title>Register Employee</title>
-</h:head>
-<h:body>
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:form>
-		<p:outputLabel value="Enter Employee Name:"></p:outputLabel>
-		<p:growl id="messages"></p:growl>
-		<p:panelGrid columns="2" style="width: 98%;">
-			<p:outputLabel value="Enter Employee Name:"></p:outputLabel>
-			<p:inputText value="#{empRegisterView.employee.employeeName}"
-				size="50"></p:inputText>
-			<p:outputLabel value="Enter Employee Hire Date:"></p:outputLabel>
-			<p:calendar value="#{empRegisterView.employee.employeeHireDate}"
-				size="50"></p:calendar>
-			<p:outputLabel value="Enter Employee Salary:"></p:outputLabel>
-			<p:inputText value="#{empRegisterView.employee.salary.basicSalarry}"
-				size="50"></p:inputText>
-			<p:outputLabel value="Enter Employee Experience:"></p:outputLabel>
-			<p:inputText value="#{empRegisterView.employee.empYrOfExperience}"
-				size="50"></p:inputText>
-			<p:outputLabel value="Enter Employee Designation:"></p:outputLabel>
-			<p:inputText value="#{empRegisterView.employee.employeeDesignation}"
-				size="50"></p:inputText>
-			<p:outputLabel value="Enter Employee Street:"></p:outputLabel>
-			<p:inputText value="#{empRegisterView.address.streetName}"
-				size="50"></p:inputText>
-			<p:outputLabel value="Enter Employee City"></p:outputLabel>
-			<p:inputText value="#{empRegisterView.address.cityName}"
-				size="50"></p:inputText>
-		</p:panelGrid>
-		<p:commandButton value="Register" action="#{empRegisterView.register}"
-			update="messages"></p:commandButton>
-	</h:form>
+<h:head>
+	<title><ui:insert name="title">Spring-Security - Login</ui:insert>
+	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- Template CSS - Do not modify -->
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.request.contextPath}/css/reset.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.request.contextPath}/css/template.css" />
+	<!-- custom -->
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.request.contextPath}/css/classnotfound.css" />
+</h:head>
+
+<h:body>
+	<div>
+		<h:form id="loginFormId" prependId="false">
+			<div class="full-box" style="text-align: center">
+				<div class="child-box box-c3">
+					<h3>Login</h3>
+					<div class="fluid-row">
+						<div class="fluid-column fluid-c12">
+							<div class="forLabel" style="width: 30%">
+								<h:outputLabel for="username" value="User" />
+							</div>
+							<div class="forField" style="width: 65%">
+								<h:inputText id="username" required="true"
+									requiredMessage="Please enter username (or go to hell...)" />
+								<h:messages for="username" />
+							</div>
+						</div>
+						<div class="fluid-column fluid-c12">
+							<div class="forLabel" style="width: 30%">
+								<h:outputLabel for="password" value="Password" />
+							</div>
+							<div class="forField" style="width: 65%">
+								<h:inputSecret id="password" required="true"
+									requiredMessage="Please enter password (otherwise you'll die!!)"
+									name="password" />
+								<h:messages for="password" />
+							</div>
+						</div>
+						<div class="fluid-column fluid-c12">
+							<div class="forLabel" style="width: 30%">
+								<h:outputText value="Authentication" />
+							</div>
+							<div class="forField" style="width: 65%">
+								<h:selectBooleanCheckbox id="method" name="method" />
+								<h:outputLabel for="method" value="LDAP" />
+							</div>
+						</div>
+					</div>
+					<ui:fragment rendered="${!empty param['error']}">
+						<div>Connection failed: user and/or password are wrong.</div>
+					</ui:fragment>
+					<div id="loginBtnPanelId">
+						<h:commandButton id="btnLoginId" value="Login" type="submit"
+							action="${loginManager.doLogin()}" styleClass="loginPanelBtn" />
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</div>
 </h:body>
 </html>

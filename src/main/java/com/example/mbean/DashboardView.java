@@ -368,21 +368,7 @@ public class DashboardView {
 	 */
 
 	public void loadTabs(String homeDashBoardTabindex) {
-		try {/*
-			 * switch (homeDashBoardTabindex) { case "0": {
-			 * chartMbean.initializeCharts();
-			 * RequestContext.getCurrentInstance().execute("loadDashBoard();");
-			 * }
-			 * 
-			 * break;
-			 * 
-			 * case "1": usersList = new ApplicationUsersDataModel(loginService,
-			 * isIncludeOfflineUsers()); setSwitchView(false);
-			 * 
-			 * break;
-			 * 
-			 * default: break; }
-			 */
+		try {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

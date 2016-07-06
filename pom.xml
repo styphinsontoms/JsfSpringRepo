@@ -207,7 +207,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<warName>medcom</warName>
+					<warName>EmployeePayRoll</warName>
 					<warSourceDirectory>src/main/webapp/</warSourceDirectory>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 					<archive>
